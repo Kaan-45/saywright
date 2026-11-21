@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   Saywright renk paleti
+   Burada tanımlanan her renk Tailwind sınıfı olarak kullanılabilir:
+   örn. bg-gece, text-deniz, border-cizgi, bg-nane/50 ...
+   Rengi değiştirmek istersen SADECE burayı değiştirmen yeterli.
+   ───────────────────────────────────────────────────────────── */
+@theme inline {
+  --color-gece: #131b2b; /* en koyu: başlıklar, ana butonlar */
+  --color-derin: #2f4a63; /* ikincil metin, koyu yüzeyler */
+  --color-deniz: #5b91a3; /* vurgu: bağlantılar, ikonlar */
+  --color-nane: #cfeae0; /* yumuşak vurgu: rozetler, arka plan lekeleri */
+  --color-zemin: #dbe8e2; /* sayfa arka planı: yumuşak adaçayı yeşili (göz yormaz) */
+  --color-kart: #f0f6f3; /* kartların arka planı: zeminden bir ton açık */
+  --color-cizgi: #c3d6ce; /* kenarlıklar */
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-zemin);
+  color: var(--color-gece);
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "yayin_talepleri" ADD COLUMN "alan_adi_turu" text;
