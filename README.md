@@ -3,7 +3,7 @@
 **Saywright**, kod bilmeyen birinin alışveriş sitesini **Türkçe sohbet ederek** kurmasını sağlayan, yapay zeka destekli bir site oluşturucudur.
 "El yapımı mum satan, mor tonlarda bir mağaza istiyorum" yazarsın; Claude ürünleri, renkleri, kategorileri ve yazıları hazırlar, sen de sonucu anında canlı önizlemede görürsün.
 
-🌐 **Canlı demo:** [saywright-dm2l.vercel.app](https://saywright-dm2l.vercel.app)
+🌐 **Canlı demo:** [saywright.vercel.app](https://saywright.vercel.app)
 
 > 🇬🇧 **In English:** Saywright is an AI-powered website builder for Turkish small businesses. Users describe the online store they want in plain Turkish; Claude (Anthropic API, structured outputs) turns each message into a validated store configuration that is rendered live. Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Drizzle ORM and Neon Postgres, deployed on Vercel. Includes auth, email verification, a store admin panel with orders, store customer accounts, a publish-approval workflow and a super-admin panel. The public demo runs in a cost-free *demo mode* (rule-based assistant + one-click style options); the real Claude integration is shown in the video below.
 

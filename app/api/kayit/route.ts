@@ -21,6 +21,10 @@ export async function POST(istek: Request) {
   await oturumAc(kullanici.id);
 
   // Doğrulama e-postası. Gönderilemese bile kayıt tamamdır; panelden "tekrar gönder" denebilir.
-  const gonderim = await dogrulamaGonder(kullanici, siteKoku(istek)).catch(() => null);
+  // (siteKoku da hata atabilir, örn. canlıda SITE_ADRESI eksikse; kayıt yine de bozulmasın)
+  const gonderim = await (async () => dogrulamaGonder(kullanici, siteKoku(istek)))().catch((h) => {
+    console.error("Doğrulama e-postası gönderilemedi:", h);
+    return null;
+  });
   return Response.json({ tamam: true, gelistirmeLinki: gonderim?.tamam ? gonderim.gelistirmeLinki : undefined });
 }
