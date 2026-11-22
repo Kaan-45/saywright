@@ -7,9 +7,11 @@
 
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import MisafirButonu from "@/components/MisafirButonu";
 import OrnekGaleri from "@/components/OrnekGaleri";
 import { ORNEK_SITELER } from "@/components/ornekSiteler";
 import { MiniOnizleme } from "@/components/SiteOnizleme";
+import { demoModu } from "@/lib/demo";
 import { KARSILASTIRMA, PLANLAR, type PlanKodu } from "@/lib/planlar";
 
 const SSS = [
@@ -281,11 +283,16 @@ export default function TanitimSayfasi() {
             >
               Ücretsiz dene · {PLANLAR.ucretsiz.siteHakki} site hediye
             </Link>
+            {demoModu() && (
+              <MisafirButonu className="rounded-xl border-2 border-gece px-7 py-3 font-semibold text-gece transition hover:bg-nane/50" />
+            )}
             <a href="#nasil" className="rounded-xl px-7 py-3.5 font-semibold text-derin hover:bg-nane/50">
               Nasıl çalışır? ↓
             </a>
           </div>
-          <p className="mt-4 text-xs text-derin/60">Kredi kartı gerekmez · 30 saniyede kayıt</p>
+          <p className="mt-4 text-xs text-derin/60">
+            {demoModu() ? "Kayıt bile gerekmez: misafir olarak tek tıkla dene" : "Kredi kartı gerekmez · 30 saniyede kayıt"}
+          </p>
 
           {/* Ürün görseli: sohbet + önizleme */}
           <div className="mx-auto mt-16 max-w-5xl overflow-hidden rounded-2xl border border-cizgi bg-kart text-left shadow-2xl shadow-gece/10">

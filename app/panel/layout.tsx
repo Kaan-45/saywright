@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import DogrulamaUyarisi from "@/components/panel/DogrulamaUyarisi";
 import PanelMenu from "@/components/panel/PanelMenu";
 import { epostaServisiVarMi } from "@/lib/eposta";
+import { MISAFIR_OMRU_SAAT, misafirMi } from "@/lib/misafir";
 import { mevcutKullanici } from "@/lib/oturum";
 import { PLANLAR } from "@/lib/planlar";
 
@@ -23,6 +24,11 @@ async function UstMenu() {
       hakVar={k.olusturulanSiteSayisi < plan.siteHakki}
       admin={k.rol === "admin"}
       />
+      {misafirMi(k.eposta) && (
+        <p className="border-b border-amber-200 bg-amber-50 px-4 py-2 text-center text-xs text-amber-800">
+          🎟️ Misafir hesabıyla deniyorsun. Bu hesap ve siteleri {MISAFIR_OMRU_SAAT} saat sonra otomatik silinir.
+        </p>
+      )}
       {/* E-posta servisi yoksa (canlı demo) doğrulama linki gönderilemez; uyarıyı göstermiyoruz. Geliştirmede link panelde çıkar. */}
       {!k.epostaDogrulandi && (epostaServisiVarMi() || process.env.NODE_ENV !== "production") && <DogrulamaUyarisi eposta={k.eposta} />}
     </>

@@ -1,6 +1,8 @@
 // Kayıt ve giriş sayfalarının ortak düzeni: solda form, sağda tanıtım paneli
 import Logo from "./Logo";
 import KimlikFormu from "./KimlikFormu";
+import MisafirButonu from "./MisafirButonu";
+import { demoModu } from "@/lib/demo";
 
 export default function KimlikSayfasi({ tur }: { tur: "kayit" | "giris" }) {
   return (
@@ -8,7 +10,15 @@ export default function KimlikSayfasi({ tur }: { tur: "kayit" | "giris" }) {
       <div className="flex flex-col px-6 py-6 sm:px-12">
         <Logo />
         <div className="flex flex-1 items-center justify-center py-12">
-          <KimlikFormu tur={tur} />
+          <div className="w-full max-w-sm">
+            <KimlikFormu tur={tur} />
+            {demoModu() && (
+              <div className="mt-6 border-t border-cizgi pt-6 text-center">
+                <p className="mb-3 text-sm text-derin/70">Hesap açmadan bakmak mı istiyorsun?</p>
+                <MisafirButonu className="w-full rounded-xl border-2 border-gece px-4 py-2.5 text-sm font-semibold text-gece transition hover:bg-nane/50" />
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div className="relative hidden overflow-hidden bg-gece lg:flex lg:items-center lg:justify-center">
