@@ -22,8 +22,9 @@ Kod tarafında bu tek bir şarta bağlı: `ANTHROPIC_API_KEY` tanımlıysa gerç
 
 ## 🎬 Gerçek Claude ile demo
 
-<!-- VIDEO -->
-*Video yakında eklenecek.*
+Yerelde, gerçek Claude açıkken çekilmiş kısa bir kayıt: Türkçe anlatılan istekten mağazanın oluşması ve sohbetle düzenlenmesi.
+
+▶️ **[Videoyu izle (MP4, ~12 MB)](docs/saywright-demo.mp4)**
 
 ## ✨ Özellikler
 
