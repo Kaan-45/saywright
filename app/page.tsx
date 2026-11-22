@@ -51,7 +51,7 @@ function AdimGorseli({ no }: { no: number }) {
           </div>
         ))}
         <div className="mt-4 rounded-lg bg-gece py-2 text-center text-xs font-semibold text-white">Hesabımı oluştur</div>
-        <p className="mt-3 text-center text-xs text-deniz">🎁 Hesabına 2 site hakkı tanımlandı</p>
+        <p className="mt-3 text-center text-xs text-deniz">🎁 Hesabına 1 site hakkı tanımlandı</p>
       </div>
     );
   if (no === 2)
@@ -130,7 +130,7 @@ function AdimGorseli({ no }: { no: number }) {
 const ADIMLAR = [
   {
     baslik: "Ücretsiz hesabını aç",
-    metin: "30 saniyede kaydol, kredi kartı gerekmez. Hesabına hemen 2 site oluşturma hakkı tanımlanır.",
+    metin: "30 saniyede kaydol, kredi kartı gerekmez. Hesabına hemen 1 site oluşturma hakkı tanımlanır.",
     ipucu: null,
   },
   {

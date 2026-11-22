@@ -47,7 +47,7 @@ export default function KimlikFormu({ tur }: { tur: "kayit" | "giris" }) {
     <div className="w-full max-w-sm">
       <h1 className="text-2xl font-bold tracking-tight">{kayitMi ? "Ücretsiz hesap oluştur" : "Tekrar hoş geldin"}</h1>
       <p className="mt-1 text-sm text-derin/70">
-        {kayitMi ? "2 site oluşturma hakkın hediye. Kredi kartı gerekmez." : "Sitelerine devam etmek için giriş yap."}
+        {kayitMi ? "1 site oluşturma hakkın hediye. Kredi kartı gerekmez." : "Sitelerine devam etmek için giriş yap."}
       </p>
 
       <form onSubmit={gonder} className="mt-8 space-y-4">
