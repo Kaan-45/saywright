@@ -43,6 +43,8 @@ export const AyarSemasi = z.object({
   hakkimizdaMetni: z.string(),
   kategoriler: z.array(z.string()).nullable().describe("Üst menüdeki kategori adları, yoksa null"),
   kampanya: z.string().nullable().describe("Vitrindeki kısa kampanya yazısı, yoksa null"),
+  arkaPlan: z.string().nullable().describe("Sayfanın arka plan rengi, 6 haneli hex (açık bir ton). Müşteri istemedikçe aynen koru; yoksa null"),
+  yaziRengi: z.string().nullable().describe("Ana yazı rengi, 6 haneli hex (koyu bir ton). Müşteri istemedikçe aynen koru; yoksa null"),
 });
 
 export type SemaAyarlari = z.infer<typeof AyarSemasi>;
@@ -61,6 +63,8 @@ export function semadanAyar(s: SemaAyarlari): MagazaAyarlari {
     })),
     kategoriler: yoksaSil(s.kategoriler),
     kampanya: yoksaSil(s.kampanya),
+    arkaPlan: yoksaSil(s.arkaPlan),
+    yaziRengi: yoksaSil(s.yaziRengi),
   };
 }
 
@@ -76,6 +80,8 @@ export function ayardanSema(a: MagazaAyarlari): SemaAyarlari {
     })),
     kategoriler: a.kategoriler ?? null,
     kampanya: a.kampanya ?? null,
+    arkaPlan: a.arkaPlan ?? null,
+    yaziRengi: a.yaziRengi ?? null,
   };
 }
 
@@ -85,6 +91,7 @@ export function ayarHatasi(a: MagazaAyarlari): string | null {
   if (!a.magazaAdi.trim()) return "Mağaza adı boş olamaz.";
   if (a.magazaAdi.length > 60) return "Mağaza adı en fazla 60 karakter olabilir.";
   if (!hex.test(a.renk.ana) || !hex.test(a.renk.acik)) return "Renkler #RRGGBB biçiminde olmalı.";
+  if ((a.arkaPlan && !hex.test(a.arkaPlan)) || (a.yaziRengi && !hex.test(a.yaziRengi))) return "Renkler #RRGGBB biçiminde olmalı.";
   if (a.urunler.length > 200) return "En fazla 200 ürün eklenebilir.";
   const adlar = new Set<string>();
   for (const u of a.urunler) {

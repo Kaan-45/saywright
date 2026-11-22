@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 import Olusturucu from "@/components/Olusturucu";
+import { demoModu } from "@/lib/demo";
 import { mevcutKullanici } from "@/lib/oturum";
 import { PLANLAR, adminPaneliAcikMi } from "@/lib/planlar";
 import { siteBul } from "@/lib/veritabani";
@@ -46,6 +47,7 @@ async function Icerik({
       ilkKalanMesaj={Math.max(0, sinir - site.yapayZekaMesajSayisi)}
       adminAcik={adminPaneliAcikMi(kullanici.plan)}
       ilkIstek={typeof istek === "string" ? istek.slice(0, 1000) : undefined}
+      demoModu={demoModu()}
     />
   );
 }

@@ -9,6 +9,7 @@ import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 import YayinSihirbazi from "@/components/yayin/YayinSihirbazi";
 import { alanAdiKokuOner } from "@/lib/alanAdi";
+import { havaleBilgileri } from "@/lib/odeme";
 import { mevcutKullanici } from "@/lib/oturum";
 import { ALAN_ADI_BUTCESI, PLANLAR } from "@/lib/planlar";
 import { adresOner, siteBul } from "@/lib/veritabani";
@@ -48,6 +49,7 @@ async function Icerik({ params }: { params: Promise<{ id: string }> }) {
         onerilenSlug={site.slug ?? (await adresOner(site.id, site.ayarlar.magazaAdi))}
         onerilenKok={alanAdiKokuOner(site.ayarlar.magazaAdi)}
         sonTalep={await siteninSonTalebi(site.id)}
+        havale={havaleBilgileri()}
         paket={{
           mevcutAd: PLANLAR[k.plan].ad,
           odemeGerekli: k.plan === "ucretsiz",

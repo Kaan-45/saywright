@@ -7,6 +7,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import HizliSecenekler from "@/components/HizliSecenekler";
 import MagazaSablonu from "@/templates/magaza/MagazaSablonu";
 import type { MagazaAyarlari } from "@/templates/magaza/tipler";
 import type { SohbetMesaji } from "@/lib/veritabani";
@@ -24,9 +25,10 @@ type Props = {
   ilkKalanMesaj: number;
   adminAcik: boolean;
   ilkIstek?: string; // panelden "hemen anlat" kutusuyla gelindiyse sohbet kutusu bununla dolu açılır
+  demoModu: boolean; // Claude API kapalıysa true → sohbette demo notu gösterilir
 };
 
-export default function Olusturucu({ siteId, ilkAyarlar, ilkMesajlar, ilkKalanMesaj, adminAcik, ilkIstek }: Props) {
+export default function Olusturucu({ siteId, ilkAyarlar, ilkMesajlar, ilkKalanMesaj, adminAcik, ilkIstek, demoModu }: Props) {
   const [ayarlar, setAyarlar] = useState(ilkAyarlar);
   const [mesajlar, setMesajlar] = useState(ilkMesajlar);
   const [kalanMesaj, setKalanMesaj] = useState(ilkKalanMesaj);
@@ -91,6 +93,12 @@ export default function Olusturucu({ siteId, ilkAyarlar, ilkMesajlar, ilkKalanMe
         </div>
 
         <div className="flex-1 space-y-3 overflow-y-auto p-5">
+          {demoModu && (
+            <p className="rounded-xl border border-dashed border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+              🧪 <b>Demo modu:</b> Bu herkese açık demoda masraf olmasın diye gerçek yapay zeka (Claude) kapalı; sohbete basit
+              kurallar cevap veriyor. Aşağıdaki <b>hızlı seçeneklerle</b> siteni tıklayarak da değiştirebilirsin.
+            </p>
+          )}
           {mesajlar.length === 0 && (
             <div>
               <p className="text-lg font-semibold">Nasıl bir site istiyorsun?</p>
@@ -130,6 +138,8 @@ export default function Olusturucu({ siteId, ilkAyarlar, ilkMesajlar, ilkKalanMe
           )}
           <div ref={sohbetSonu} />
         </div>
+
+        <HizliSecenekler siteId={siteId} ayarlar={ayarlar} acikBasla={demoModu} onDegisti={setAyarlar} />
 
         <form
           onSubmit={(e) => {

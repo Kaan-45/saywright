@@ -6,6 +6,7 @@
 import { Suspense } from "react";
 import DogrulamaUyarisi from "@/components/panel/DogrulamaUyarisi";
 import PanelMenu from "@/components/panel/PanelMenu";
+import { epostaServisiVarMi } from "@/lib/eposta";
 import { mevcutKullanici } from "@/lib/oturum";
 import { PLANLAR } from "@/lib/planlar";
 
@@ -22,7 +23,8 @@ async function UstMenu() {
       hakVar={k.olusturulanSiteSayisi < plan.siteHakki}
       admin={k.rol === "admin"}
       />
-      {!k.epostaDogrulandi && <DogrulamaUyarisi eposta={k.eposta} />}
+      {/* E-posta servisi yoksa (canlı demo) doğrulama linki gönderilemez; uyarıyı göstermiyoruz. Geliştirmede link panelde çıkar. */}
+      {!k.epostaDogrulandi && (epostaServisiVarMi() || process.env.NODE_ENV !== "production") && <DogrulamaUyarisi eposta={k.eposta} />}
     </>
   );
 }

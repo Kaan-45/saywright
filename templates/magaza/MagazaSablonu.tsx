@@ -129,7 +129,7 @@ export default function MagazaSablonu({
   const emoji = (i: number) => urunler[i % Math.max(urunler.length, 1)]?.emoji ?? "🛍️";
 
   return (
-    <div className="@container min-h-full bg-white text-zinc-900">
+    <div className="@container min-h-full" style={{ background: ayarlar.arkaPlan ?? "#ffffff", color: ayarlar.yaziRengi ?? "#18181b" }}>
       {/* ── Duyuru şeridi ── */}
       <div className="px-4 py-2 text-center text-xs font-medium text-white" style={{ background: renk.ana }}>
         🚚 500 TL üzeri siparişlerde kargo bedava · ↩️ 14 gün koşulsuz iade · 🔒 Güvenli ödeme

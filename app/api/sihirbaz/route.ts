@@ -12,6 +12,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { claudeYapayZeka } from "@/lib/claudeYapayZeka";
 import { sahteYapayZeka } from "@/lib/sahteYapayZeka";
 import { magazaOnbellegiTemizle } from "@/lib/magazalar";
+import { dogrulamaZorunluMu } from "@/lib/demo";
 import { DOGRULAMA_GEREKLI, mevcutKullanici } from "@/lib/oturum";
 import { PLANLAR } from "@/lib/planlar";
 import { siteBul, siteGuncelle } from "@/lib/veritabani";
@@ -22,7 +23,7 @@ const MAKS_MESAJ_UZUNLUGU = 1000;
 export async function POST(istek: Request) {
   const kullanici = await mevcutKullanici();
   if (!kullanici) return Response.json({ hata: "Oturumun kapanmış, tekrar giriş yap." }, { status: 401 });
-  if (!kullanici.epostaDogrulandi) return Response.json({ hata: DOGRULAMA_GEREKLI }, { status: 403 });
+  if (dogrulamaZorunluMu(kullanici)) return Response.json({ hata: DOGRULAMA_GEREKLI }, { status: 403 });
 
   const { siteId, metin } = (await istek.json()) as { siteId: string; metin: string };
   const site = await siteBul(String(siteId));
@@ -39,7 +40,7 @@ export async function POST(istek: Request) {
   let cevap;
   if (!process.env.ANTHROPIC_API_KEY) {
     cevap = sahteYapayZeka(eski, temizMetin);
-    cevap.mesaj += " (Sahte yapay zeka: API anahtarı bulunamadı.)";
+    cevap.mesaj += "\n\n🧪 Demo modu: basit kurallarla çalışan yapay zeka. Hızlı seçenekleri de deneyebilirsin.";
   } else {
     try {
       cevap = await claudeYapayZeka(eski, temizMetin);

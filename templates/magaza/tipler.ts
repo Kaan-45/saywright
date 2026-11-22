@@ -42,4 +42,6 @@ export type MagazaAyarlari = {
   // "?" = isteğe bağlı. Yoksa şablon makul bir varsayılan kullanır.
   kategoriler?: string[]; // üst menüdeki kategori listesi
   kampanya?: string; // vitrindeki kampanya yazısı
+  arkaPlan?: string; // sayfanın arka plan rengi (hex). Yoksa beyaz.
+  yaziRengi?: string; // ana yazı rengi (hex). Yoksa koyu gri.
 };

@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useSyncExternalStore } from "react";
 import { UZANTILAR, alanAdiKokuHatasi, bagliAlanAdiHatasi, type Uzanti } from "@/lib/alanAdi";
-import { HAVALE_BILGILERI } from "@/lib/odeme";
+import type { HavaleBilgileri } from "@/lib/odeme";
 import { slugHatasi, slugOlustur } from "@/lib/yardimci";
 import type { YayinTalebi } from "@/lib/yayinTalepleri";
 
@@ -36,6 +36,7 @@ type Props = {
   onerilenKok: string;
   sonTalep: YayinTalebi | null;
   paket: Paket;
+  havale: HavaleBilgileri;
 };
 
 const tl = (n: number) => `${n.toLocaleString("tr-TR")} ₺`;
@@ -121,7 +122,7 @@ function KopyalaSatiri({ etiket, deger }: { etiket: string; deger: string }) {
   );
 }
 
-function BekleyenKart({ siteId, paket, talep }: Props & { talep: YayinTalebi }) {
+function BekleyenKart({ siteId, paket, talep, havale }: Props & { talep: YayinTalebi }) {
   const router = useRouter();
   const kok = useKokAdres();
   const [bekliyor, setBekliyor] = useState(false);
@@ -169,14 +170,14 @@ function BekleyenKart({ siteId, paket, talep }: Props & { talep: YayinTalebi }) 
           <p className="mt-1 text-sm text-derin">
             Lütfen açıklama kısmına <b>ödeme kodunu</b> yaz; ödemenin sana ait olduğunu böyle anlıyoruz.
           </p>
-          {HAVALE_BILGILERI.ornekMi && (
+          {havale.ornekMi && (
             <p className="mt-3 rounded-lg border border-dashed border-amber-400 bg-amber-50 px-3 py-2 text-xs text-amber-800">
-              🧪 Bu hesap bilgileri örnektir. Gerçek bilgiler <code>lib/odeme.ts</code> dosyasına yazılacak.
+              🧪 Bu hesap bilgileri örnektir. Lütfen henüz ödeme yapma.
             </p>
           )}
           <div className="mt-4 rounded-2xl border border-cizgi bg-white/70 px-4">
-            <KopyalaSatiri etiket="Alıcı" deger={HAVALE_BILGILERI.alici} />
-            <KopyalaSatiri etiket={`IBAN · ${HAVALE_BILGILERI.banka}`} deger={HAVALE_BILGILERI.iban} />
+            <KopyalaSatiri etiket="Alıcı" deger={havale.alici} />
+            <KopyalaSatiri etiket={`IBAN · ${havale.banka}`} deger={havale.iban} />
             <KopyalaSatiri etiket="Tutar" deger={tl(talep.tutarKurus / 100)} />
             <KopyalaSatiri etiket="Açıklama (ödeme kodu)" deger={talep.odemeKodu} />
           </div>
